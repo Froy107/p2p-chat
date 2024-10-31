@@ -12,32 +12,32 @@ function connectWebSocket() {
 
     socket.onopen = () => {
         console.log("Connected to WebSocket");
-        updateConnectionStatus(true);
-        initializePeerConnection();
-        reconnecting = false; // Сбрасываем флаг, если подключение успешно
+        updateConnectionStatus(true); // Обновление статуса соединения
+        initializePeerConnection(); // Инициализация P2P соединения
+        reconnecting = false; // Сброс флага 
     };
 
     socket.onmessage = async (event) => {
         let data;
         if (typeof event.data === 'string') {
-            data = JSON.parse(event.data);
+            data = JSON.parse(event.data); // Обработка текстовых данных
         } else if (event.data instanceof Blob) {
-            let text = await event.data.text();
+            let text = await event.data.text(); // Обработка бинарных данных
             data = JSON.parse(text);
         }
-        handleSignalingData(data);
+        handleSignalingData(data); //Обработка сигнальных данных
     };
 
     socket.onclose = () => {
         console.log("Disconnected from WebSocket");
-        updateConnectionStatus(false);
+        updateConnectionStatus(false); // Обновление статуса соединения
         if (!reconnecting) {
-            reconnecting = true; // Устанавливаем флаг реконнекта
+            reconnecting = true; // Установка флага реконнекта
             setTimeout(connectWebSocket, reconnectInterval); // Попытка переподключения
         }
     };
 }
-
+// Функция для обновления индикатора статуса соединения
 function updateConnectionStatus(isConnected) {
     statusIndicator.style.backgroundColor = isConnected ? 'green' : 'red';
 }
@@ -45,7 +45,7 @@ function updateConnectionStatus(isConnected) {
 function initializePeerConnection() {
     peerConnection = new RTCPeerConnection();
 
-    // Определяем, кто инициатор
+    // Определение, кто инициатор
     if (isInitiator) {
         dataChannel = peerConnection.createDataChannel("chat");
         setupDataChannel();
@@ -166,13 +166,13 @@ function sendFile(event) {
         reader.onload = (event) => {
             // Отправляем содержимое файла как ArrayBuffer
             const arrayBuffer = event.target.result;
-            dataChannel.send(arrayBuffer); // Отправляем файл
+            dataChannel.send(arrayBuffer); 
 
             // Отправляем сообщение о том, что файл был отправлен
             displayMessage(`Вы отправили файл: ${file.name}`);
-            isSendingFile = false; // Сбрасываем флаг после завершения отправки
+            isSendingFile = false; 
         };
-        reader.readAsArrayBuffer(file); // Читаем файл как ArrayBuffer
+        reader.readAsArrayBuffer(file); 
     } else {
         console.log('DataChannel is not open. File not sent.');
     }
@@ -180,7 +180,7 @@ function sendFile(event) {
 
 // Обработчик выбора файла
 document.getElementById("fileInput").addEventListener("change", (event) => {
-    sendFile(event); // Отправляем файл
+    sendFile(event);
 });
 
 document.getElementById("messageInput").addEventListener("keypress", function (event) {
@@ -190,7 +190,7 @@ document.getElementById("messageInput").addEventListener("keypress", function (e
 });
 
 // Устанавливаем инициатора случайным образом для тестирования
-isInitiator = Math.random() > 0.5; // Для тестирования, можно вручную установить true или false
+isInitiator = Math.random() > 0.5; 
 
 // Инициализация подключения к WebSocket
 connectWebSocket();

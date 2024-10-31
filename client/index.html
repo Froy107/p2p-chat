@@ -7,14 +7,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="chat">
-        <div id="statusIndicator"></div> <!-- Индикатор статуса -->
-        <div id="messages"></div>
-        <div id="inputContainer">
-            <input type="file" id="fileInput" accept="*/*" onchange="sendFile(event)">
+    <div id="chat"> <!-- Контейнер для чата -->
+        <div id="statusIndicator"></div> <!-- Индикатор статуса подключения -->
+        <div id="messages"></div> <!-- Контейнер для отображения сообщений -->
+        <div id="inputContainer"> <!-- Контейнер для ввода сообщения и выбора файлов -->
+            <input type="file" id="fileInput" accept="*/*" onchange="sendFile(event)"> <!-- Поле выбора файла -->
             <button class="file-button" onclick="document.getElementById('fileInput').click();"></button> <!-- Кнопка выбора файла -->
-            <input type="text" id="messageInput" placeholder="Введите сообщение...">
-            <button onclick="sendMessage()">Отправить</button>
+            <input type="text" id="messageInput" placeholder="Введите сообщение..."> <!-- Поле ввода сообщения -->
+            <button onclick="sendMessage()">Отправить</button> <!-- Кнопка отправки сообщения -->
         </div>
     </div>
     <script src="app.js"></script>

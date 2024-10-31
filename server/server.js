@@ -1,10 +1,9 @@
-// server.js
-const WebSocket = require('ws');
+const WebSocket = require('ws'); // Импорт модуля WebSocket
 
 const server = new WebSocket.Server({ port: 5001 });
 
 server.on('connection', (socket) => {
-    console.log('Client connected');
+    console.log('Client connected'); // Логируем подключение клиента
 
     socket.on('message', (message) => {
         server.clients.forEach((client) => {
@@ -15,4 +14,4 @@ server.on('connection', (socket) => {
     });
 });
 
-console.log('WebSocket server is running on ws://localhost:5001');
+console.log('WebSocket server is running on ws://localhost:5001'); // Логируем запуск сервера
