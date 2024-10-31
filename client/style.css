@@ -1,0 +1,133 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #121212;
+}
+
+#chat {
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #1f1f1f;
+    position: relative; /* Для позиционирования индикатора статуса */
+}
+
+#messages {
+    border-bottom: 1px solid #333;
+    height: 280px;
+    overflow-y: auto;
+    padding: 15px;
+    box-sizing: border-box;
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+}
+
+#statusIndicator {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: red; /* Начальный цвет - красный */
+}
+
+#inputContainer {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #333;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#messageInput {
+    flex: 1;
+    padding: 12px 15px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    background-color: #2c2f33;
+    color: #e0e0e0;
+    border-radius: 8px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+#messageInput:focus {
+    background-color: #3a3f47;
+    box-shadow: 0 0 5px rgba(114, 137, 218, 0.6);
+}
+
+button {
+    padding: 12px 18px;
+    background-color: #7289da;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    margin-left: 10px;
+}
+
+button:hover {
+    background-color: #5b6eae;
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(91, 110, 174, 0.4);
+}
+
+button:active {
+    transform: scale(1);
+    box-shadow: 0 4px 8px rgba(91, 110, 174, 0.3);
+}
+
+#messages div {
+    margin-bottom: 8px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background-color: #2c2f33;
+    color: #ffffff;
+    font-size: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    max-width: 75%;
+    word-wrap: break-word;
+    opacity: 0;
+    animation: fadeIn 0.5s ease forwards; /* Анимация появления */
+}
+
+#messages div.user-message {
+    background-color: #7289da;
+    color: #ffffff;
+    text-align: right;
+    align-self: flex-end;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#fileInput {
+    display: none; /* Скрываем стандартный input */
+}
+
+.file-button {
+    background: url('button1.png') no-repeat center center; /* Путь к изображению */
+    background-size: contain;
+    width: 30px; /* Устанавливаем ширину кнопки */
+    height: 30px; /* Устанавливаем высоту кнопки */
+    border: none;
+    cursor: pointer;
+    margin-left: 1px; /* Отступ для кнопки */
+    transition: transform 0.3s;
+}
+
+.file-button:hover {
+    transform: scale(1.1); /* Увеличиваем при наведении */
+}
